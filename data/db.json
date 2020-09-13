@@ -1,0 +1,65 @@
+{
+  "categories": [
+    {
+      "name": "FemaleClothes",
+      "display_name": "Female_Fashion",
+      "description": "short and long dress",
+      "id": 1
+    },
+    {
+      "name": "MaleClothes",
+      "display_name": "Male_Fashion",
+      "description": "Discover the latest trends in men's fashion & style with ASOS. Shop the new range of men's clothes, accessories, shoes, bags & more.",
+      "id": 2
+    },
+    {
+      "name": "KidsClothes",
+      "display_name": "Kids_Fashion",
+      "description": "Clothes for girls and boys, newborn to gradeschool. See more ideas about Childrens fashion, Kids outfits, Kids fashion",
+      "id": 3
+    },
+    {
+      "name": "Shoes",
+      "display_name": "Shoes_Fashion",
+      "description": "Footwear, Shoe, Leg, Ankle, Human leg, Fashion, Joint, Sandal. Getty Images. Consider them built-in anklets for your shoes.",
+      "id": 4
+    }
+  ],
+  "products": [
+    {
+      "category": "FemaleClothes",
+      "name": "dress",
+      "display_name": "log_dress",
+      "description": "Elegant Fashion doesn't mean looking frumpy — not for your wedding, swimsuits, or everyday wear!. See more ideas about Fashion, Style, ...",
+      "id": 1
+    },
+    {
+      "category": "MaleClothes",
+      "name": "suits ",
+      "display_name": "men_suits",
+      "description": "Wedding Suits, Sport Coats, Blazers, Custom Pants, Men's Custom Dress Shirts, Formal Wear, Three Piece Suits, Double Breasted Suits, Plaid Suits, Shawl ...",
+      "id": 2
+    },
+    {
+      "category": "MaleClothes",
+      "name": "pant",
+      "display_name": "pant_men_fashion",
+      "description": "These are the essential men's trouser styles every man should own ... a first date, you need to know what pants to wear and how to style them.",
+      "id": 3
+    },
+    {
+      "category": "Shoes",
+      "name": "kidsshoes",
+      "display_name": "pant_men_fashion",
+      "description": "Discover kids' shoes, boots, and sandals for children from the best brands at Shoe Carnival. Shop baby, toddler, and preteen shoes at unbeatable prices!",
+      "id": 4
+    },
+    {
+      "category": "KidsClothes",
+      "name": "pants&tops",
+      "display_name": "kids_pant_top",
+      "description": "As for the quality of the fabric, stitching, snaps, and buttons, it's simply top-notch. I can see them having multiple lifespans as they are passed on to ...",
+      "id": 6
+    }
+  ]
+}
