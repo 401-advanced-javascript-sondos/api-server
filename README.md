@@ -24,4 +24,4 @@ an API that serves data for a virtual storefront, which displays categories and 
 
 ## UML
 
-[UML Diagrame ](assest/uml-06.jpg)
+![UML Diagrame ](assest/uml-06.jpg)
