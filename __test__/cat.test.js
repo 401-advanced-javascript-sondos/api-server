@@ -2,21 +2,16 @@
 
 require('@code-fellows/supergoose');
 
-const pro= require('../lib/models/products/products.collection');
+const categories = require('../lib/models/categories/categories.collection');
 
 jest.spyOn(global.console, 'log');
 
-describe('pro Module', () => {
+describe('categories Module', () => {
 
-  let data = {
-    category: "MaleClothes",
-    name: "pant",
-    display_name: "pant_men_fashion",
-    description: "These are the essential men's trouser styles every man should own"
-  };
+  let data = { name: 'Sondos', display_name: 'student', describe: 'student' };
 
   it('it can create()', async () => {
-    const result = await pro.create(data);
+    const result = await categories.create(data);
     Object.keys(data).forEach(key => {
       expect(result[key]).toEqual(data[key]);
     });
@@ -26,7 +21,7 @@ describe('pro Module', () => {
   ////Add
 
   it('add() will add the data to DB', () => {
-    return pro.create(data).then(result => {
+    return categories.create(data).then(result => {
       console.log(result);
       Object.keys(data).forEach(e => {
         expect(result[0][e]).toEqual(data[e]);
@@ -41,10 +36,10 @@ describe('pro Module', () => {
 
   it('get(id) will get data by id ', () => {
 
-    return pro.create(data)
+    return categories.create(data)
       .then(result => {
         console.log(result);
-        return pro.get(result._id)
+        return categories.get(result._id)
           .then(e => {
             Object.keys(data).forEach(item => {
               expect(result[0][item]).toEqual(data[item]);
@@ -57,9 +52,9 @@ describe('pro Module', () => {
   // ///find   
 
   it('get(id) will get data by id ', () => {
-      return pro.create(data)
+      return categories.create(data)
           .then(result => {
-              return pro.get()
+              return categories.get()
                   .then(e => {
                       Object.keys(data).forEach(item => {
                           expect(result[item]).toEqual(data[item]);
@@ -74,9 +69,9 @@ describe('pro Module', () => {
   // ///Delete   
 
   it('Delete(id) delete data ', () => {
-    return pro.create(data)
+    return categories.create(data)
       .then(result => {
-        return pro.delete(result._id)
+        return categories.delete(result._id)
           .then(e => {
             Object.keys(data).forEach(item => {
               expect().toEqual();
