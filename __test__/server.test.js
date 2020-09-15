@@ -30,7 +30,7 @@ describe('server.js',()=>{
   });
 
   it('should be stutas 200 for put /categories/:id',()=>{
-    return mockRequest.put('/categories/1').then(result=>{
+    return mockRequest.put('/categories/:id').then(result=>{
       expect(result.status).toBe(200);
     }).catch(err=>{
       console.log(err);
@@ -38,7 +38,7 @@ describe('server.js',()=>{
   });
 
   it('should be stutas 200 for delete /categories/:id',()=>{
-    return mockRequest.delete('/categories/1').then(result=>{
+    return mockRequest.delete('/categories/:id').then(result=>{
       expect(result.status).toBe(200);
     }).catch(err=>{
       console.log(err);
@@ -75,7 +75,7 @@ describe('server.js',()=>{
   });
 
   it('should be stutas 200 for put /products/:id',()=>{
-    return mockRequest.put('/products/1').then(result=>{
+    return mockRequest.put('/products/:id').then(result=>{
       expect(result.status).toBe(200);
     }).catch(err=>{
       console.log(err);
@@ -83,7 +83,7 @@ describe('server.js',()=>{
   });
 
   it('should be stutas 200 for delete /products/:id',()=>{
-    return mockRequest.delete('/products/1').then(result=>{
+    return mockRequest.delete('/products/:id').then(result=>{
       expect(result.status).toBe(200);
     }).catch(err=>{
       console.log(err);
