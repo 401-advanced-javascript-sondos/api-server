@@ -7,15 +7,8 @@ const mockRequest = supertest(server);
 describe('sever', () => {
   it('should respond with 500 Error with error path ', () => {
     return mockRequest
-      .get('/server error').then(results => {
+      .get('/error').then(results => {
         expect(results.status).toBe(500);
       }).catch(e => console.error(e));
   }); 
-  it('should respond with 500 Error with error method ', () => {
-    return mockRequest
-      .patch('/categories').then(results => {
-        expect(results.status).toBe(500);
-      }).catch(e => console.error(e));
-  }); 
-
 });
