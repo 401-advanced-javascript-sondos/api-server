@@ -1,107 +1,116 @@
 'use strict';
 
 require('@code-fellows/supergoose');
-
-const categories = require('../lib/models/categories/categories.collection');
-
+const products = require('../lib/models/products/products.collection');
 jest.spyOn(global.console, 'log');
 
-describe('categories Module', () => {
+
+const { server } = require('../lib/server');
+const supergoose = require('@code-fellows/supergoose');
+const mockRequest = supergoose(server);
 
 
-    it('it can create()', async ()=> {
-        let data = { name: 'Sondos', display_name: 'student', describe: 'student' };
-        const result = await categories.create(data);
-        Object.keys(data).forEach(key=> {
-            expect(result[key]).toEqual(data[key]);
-        });
+
+describe('products Module', () => {
+let data={
+  category: "Shoes",
+      name: "kidsshoes",
+      display_name: "pant_men_fashion",
+      description: "Discover kids' shoes, boots, and sandals for" 
+};
+let data2={
+  category: "kids",
+      name: "dress",
+      display_name: "pant_kid_fashion",
+      description: "Discover kids' shoes, boots, and sandals for" 
+};
+
+
+  it('it can create()', async () => {
+    
+  // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+    const result = await mockRequest.post('/products').send(data);
+    let recored = result.body;
+    // console.log('recored', recored);
+    Object.keys(data).forEach(key => {
+      // console.log('recored[key] ->', recored[key]);
+      // console.log(key);
+      expect(recored[key]).toEqual(data[key]);
     });
+  });
 
 
-    ////Add
+  it('it can get()', async () => {
+    
+  // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+    const result = await mockRequest.post('/products').send(data);
+    let recored = result.body;
+    const catg = await mockRequest.get(`/products/${recored._id}`);
+    let catItem = catg.body;
 
-    it('add() will add the data to DB', () => {
-        let data = { name: 'Sondos', display_name: 'student', describe: 'student' };
-        return categories.create(data).then(result => {
-            console.log(result)
-            Object.keys(data).forEach(e => {
-                expect(result[e]).toEqual(data[e]);
+    console.log('cat', catItem);
 
-            })
-        });
-
+    Object.keys(data).forEach((key) => {
+      // console.log('record', catItem[key]);
+      expect(catItem[0][key]).toEqual(data[key]);
     });
+  });
 
 
-    ///find   
+  it('it can get()', async () => {
+    
+  // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+  // let data2 = { name: 'name', display_name: 'display', description: 'description' };
 
-    // it('get(id) will get data by id ', () => {
-    //     let data = { name: 'Sondos', display_name: 'student', describe: 'student' };
+    let array = [data, data2];
 
-    //     return categories.create(data)
-    //         .then(result => {
-    //             console.log(result)
-    //             return categories.get(result._id)
-    //                 .then(e => {
-    //                     console.log(e)
-    //                     Object.keys(data).forEach(item => {
-    //                         expect(result[item]).toEqual(data[item]);
-    //                     })
-    //                 })
+    await mockRequest.post('/products').send(data);
+    await mockRequest.post('/products').send(data2);
 
-    //         })
+    const catg = await mockRequest.get(`/products`);
+    let catItem = catg.body.resutl;
+    // console.log(catItem)
+    console.log('cat', catItem);
+    // console.log('cat.result', catItem.resutl);
+
+    catItem.forEach((key) => {
+      // console.log('record', catItem[key]);
+      expect(array[key]).toEqual(catItem[key]);
+    });
+  });
+
+
+  it('it can delete()', async () => {
+    
+  // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+
+    const result = await mockRequest.post('/products').send(data);
+    let recored = result.body;
+    // console.log('up', recored);
+    const catg = await mockRequest.delete(`/products/${recored._id}`);
+    let catItem = catg.body;
+
+    // Object.keys(data).forEach((key) => {
+    // console.log('record',catItem);
+    expect(catItem).toEqual({ "error": {} });
     // });
-
-    // ///find   
-
-    // it('get(id) will get data by id ', () => {
-    //     let data = { name: 'Sondos', display_name: 'student', describe: 'student' };
-
-    //     return categories.create(data)
-    //         .then(result => {
-    //             console.log(result)
-    //             return categories.get()
-    //                 .then(e => {
-    //                     console.log(e)
-    //                     Object.keys(data).forEach(item => {
-    //                         expect(result[item]).toEqual(data[item]);
-    //                     })
-    //                 })
-
-    //         })
-    // });
+  });
 
 
+  it('it can update()', async () => {
+    
+  // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+  //  let data2 = { name: 'name', display_name: 'display', description: 'description' };
+    const result = await mockRequest.post('/products').send(data);
+    let recored = result.body;
+    await mockRequest.put(`/products/${recored._id}`).send(data2);
+    const catg = await (await mockRequest.get(`/products/${recored._id}`));
+    let catItem = catg.body;
 
-    // ///Delete   
-
-    // it('Delete(id) delete data ', () => {
-    //     let data = { name: 'Sondos', display_name: 'student', describe: 'student' };
-
-    //     return categories.create(data)
-    //         .then(result => {
-    //             // console.log(result)
-    //             return categories.delete(result._id)
-    //                 .then(e => {
-    //                     // console.log(e)
-    //                     Object.keys(data).forEach(item => {
-    //                         expect().toEqual();
-    //                     })
-    //                 })
-
-    //         })
-    // });
-
-
-    // it('it can get()', async ()=> {
-    //     let data = { name: 'Sondos', display_name: 'student', describe: 'student' };
-    //     const result = await categories.create(data);
-    //     const records = await categories.get(result._id); // []
-    //     console.log("records >>>> ", records)
-    //     Object.keys(data).forEach(key=> {
-    //         expect(records[0][key]).toEqual(data[key]);
-    //     });
-    // });
+    Object.keys(data2).forEach((key) => {
+      expect(catItem[0][key]).toEqual(data2[key]);
+    });
+  });
 
 
 
