@@ -1,90 +1,118 @@
 'use strict';
 
 require('@code-fellows/supergoose');
-
-const pro= require('../lib/models/products/products.collection');
-
+const products = require('../lib/models/products/products.collection');
 jest.spyOn(global.console, 'log');
 
-describe('pro Module', () => {
 
-  let data = {
-    category: "MaleClothes",
-    name: "pant",
-    display_name: "pant_men_fashion",
-    description: "These are the essential men's trouser styles every man should own"
-  };
+const { server } = require('../lib/server');
+const supergoose = require('@code-fellows/supergoose');
+const mockRequest = supergoose(server);
+
+
+
+describe('products Module', () => {
+let data={
+  category: "Shoes",
+      name: "kidsshoes",
+      display_name: "pant_men_fashion",
+      description: "Discover kids' shoes, boots, and sandals for" 
+};
+let data2={
+  category: "kids",
+      name: "dress",
+      display_name: "pant_kid_fashion",
+      description: "Discover kids' shoes, boots, and sandals for" 
+};
+
 
   it('it can create()', async () => {
-    const result = await pro.create(data);
+    
+  // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+    const result = await mockRequest.post('/products').send(data);
+    let recored = result.body;
+    // console.log('recored', recored);
     Object.keys(data).forEach(key => {
-      expect(result[key]).toEqual(data[key]);
+      // console.log('recored[key] ->', recored[key]);
+      // console.log(key);
+      expect(recored[key]).toEqual(data[key]);
     });
   });
 
 
-  ////Add
+  it('it can get()', async () => {
+    
+  // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+    const result = await mockRequest.post('/products').send(data);
+    let recored = result.body;
+    const catg = await mockRequest.get(`/products/${recored._id}`);
+    let catItem = catg.body;
 
-  it('add() will add the data to DB', () => {
-    return pro.create(data).then(result => {
-      console.log(result);
-      Object.keys(data).forEach(e => {
-        expect(result[0][e]).toEqual(data[e]);
+    console.log('cat', catItem);
 
-      });
+    Object.keys(data).forEach((key) => {
+      // console.log('record', catItem[key]);
+      expect(catItem[0][key]).toEqual(data[key]);
     });
-
   });
 
 
-  //find   
+  it('it can get()', async () => {
+    
+  // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+  // let data2 = { name: 'name', display_name: 'display', description: 'description' };
 
-  it('get(id) will get data by id ', () => {
+    let array = [data, data2];
 
-    return pro.create(data)
-      .then(result => {
-        console.log(result);
-        return pro.get(result._id)
-          .then(e => {
-            Object.keys(data).forEach(item => {
-              expect(result[0][item]).toEqual(data[item]);
-            })
-          })
+    await mockRequest.post('/products').send(data);
+    await mockRequest.post('/products').send(data2);
 
-      })
-  });
+    const catg = await mockRequest.get(`/products`);
+    let catItem = catg.body.resutl;
+    // console.log(catItem)
+    console.log('cat', catItem);
+    // console.log('cat.result', catItem.resutl);
 
-  // ///find   
-
-  it('get(id) will get data by id ', () => {
-      return pro.create(data)
-          .then(result => {
-              return pro.get()
-                  .then(e => {
-                      Object.keys(data).forEach(item => {
-                          expect(result[item]).toEqual(data[item]);
-                      })
-                  })
-
-          })
+    catItem.forEach((key) => {
+      // console.log('record', catItem[key]);
+      expect(array[key]).toEqual(catItem[key]);
+    });
   });
 
 
+  it('it can delete()', async () => {
+    
+  // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
 
-  // ///Delete   
+    const result = await mockRequest.post('/products').send(data);
+    let recored = result.body;
+    // console.log('up', recored);
+    const catg = await mockRequest.delete(`/products/${recored._id}`);
+    let catItem = catg.body;
 
-  it('Delete(id) delete data ', () => {
-    return pro.create(data)
-      .then(result => {
-        return pro.delete(result._id)
-          .then(e => {
-            Object.keys(data).forEach(item => {
-              expect().toEqual();
-            })
-          })
-
-      })
+    // Object.keys(data).forEach((key) => {
+    // console.log('record',catItem);
+    expect(catItem).toEqual({ "error": {} });
+    // });
   });
+
+
+  it('it can update()', async () => {
+    
+  // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+  //  let data2 = { name: 'name', display_name: 'display', description: 'description' };
+    const result = await mockRequest.post('/products').send(data);
+    let recored = result.body;
+    await mockRequest.put(`/products/${recored._id}`).send(data2);
+    const catg = await (await mockRequest.get(`/products/${recored._id}`));
+    let catItem = catg.body;
+
+    Object.keys(data2).forEach((key) => {
+      expect(catItem[0][key]).toEqual(data2[key]);
+    });
+  });
+
+
 
 });
 
