@@ -17,7 +17,7 @@ describe('categories Module', () => {
   it('it can create()', async () => {
     
   let data = { name: 'Sondos', display_name: 'student', description: 'student' };
-    const result = await mockRequest.post('/categories').send(data);
+    const result = await mockRequest.post('/api/v1/categories').send(data);
     let recored = result.body;
     // console.log('recored', recored);
     Object.keys(data).forEach(key => {
@@ -31,9 +31,9 @@ describe('categories Module', () => {
   it('it can get()', async () => {
     
   let data = { name: 'Sondos', display_name: 'student', description: 'student' };
-    const result = await mockRequest.post('/categories').send(data);
+    const result = await mockRequest.post('/api/v1/categories').send(data);
     let recored = result.body;
-    const catg = await mockRequest.get(`/categories/${recored._id}`);
+    const catg = await mockRequest.get(`/api/v1/categories/${recored._id}`);
     let catItem = catg.body;
 
     console.log('cat', catItem);
@@ -52,10 +52,10 @@ describe('categories Module', () => {
 
     let array = [data, data2];
 
-    await mockRequest.post('/categories').send(array[0]);
-    await mockRequest.post('/categories').send(array[1]);
+    await mockRequest.post('/api/v1/categories').send(array[0]);
+    await mockRequest.post('/api/v1/categories').send(array[1]);
 
-    const catg = await mockRequest.get(`/categories`);
+    const catg = await mockRequest.get(`/api/v1/categories`);
     let catItem = catg.body.resutl;
     // console.log(catItem)
     // console.log('cat', catItem);
@@ -72,16 +72,16 @@ describe('categories Module', () => {
     
   let data = { name: 'Sondos', display_name: 'student', description: 'student' };
 
-    const result = await mockRequest.post('/categories').send(data);
+    const result = await mockRequest.post('/api/v1/categories').send(data);
     let recored = result.body;
     // console.log('up', recored);
-    const catg = await mockRequest.delete(`/categories/${recored._id}`);
+    const catg = await mockRequest.delete(`/api/v1/categories/${recored._id}`);
     let catItem = catg.body;
 
-    // Object.keys(data).forEach((key) => {
-    // console.log('record',catItem);
-    expect(catItem).toEqual({ "error": {} });
-    // });
+    Object.keys(data).forEach((key) => {
+    console.log('record',catItem);
+    expect(catItem[key]).toEqual(data[key]);
+    });
   });
 
 
@@ -89,10 +89,10 @@ describe('categories Module', () => {
     
   let data = { name: 'Sondos', display_name: 'student', description: 'student' };
    let data2 = { name: 'name', display_name: 'display', description: 'description' };
-    const result = await mockRequest.post('/categories').send(data);
+    const result = await mockRequest.post('/api/v1/categories').send(data);
     let recored = result.body;
-    await mockRequest.put(`/categories/${recored._id}`).send(data2);
-    const catg = await (await mockRequest.get(`/categories/${recored._id}`));
+    await mockRequest.put(`/api/v1/categories/${recored._id}`).send(data2);
+    const catg = await (await mockRequest.get(`/api/v1/categories/${recored._id}`));
     let catItem = catg.body;
 
     Object.keys(data2).forEach((key) => {

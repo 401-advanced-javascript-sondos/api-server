@@ -55,9 +55,6 @@ describe('server.js',()=>{
 
 
 
-
-
-
   it('should be stutas 200 for post /products',()=>{
     return mockRequest.post('/products').then(result=>{
       expect(result.status).toBe(200);
