@@ -12,23 +12,23 @@ const mockRequest = supergoose(server);
 
 
 describe('products Module', () => {
-let data={
-  category: "Shoes",
-      name: "kidsshoes",
-      display_name: "pant_men_fashion",
-      description: "Discover kids' shoes, boots, and sandals for" 
-};
-let data2={
-  category: "kids",
-      name: "dress",
-      display_name: "pant_kid_fashion",
-      description: "Discover kids' shoes, boots, and sandals for" 
-};
+  let data={
+    category: 'Shoes',
+    name: 'kidsshoes',
+    display_name: 'pant_men_fashion',
+    description: 'Discover kids\' shoes, boots, and sandals for', 
+  };
+  let data2={
+    category: 'kids',
+    name: 'dress',
+    display_name: 'pant_kid_fashion',
+    description: 'Discover kids\' shoes, boots, and sandals for', 
+  };
 
 
   it('it can create()', async () => {
     
-  // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+    // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
     const result = await mockRequest.post('/api/v1/products').send(data);
     let recored = result.body;
     console.log('recored', recored);
@@ -43,7 +43,7 @@ let data2={
 
   it('it can get()', async () => {
     
-  // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+    // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
     const result = await mockRequest.post('/api/v1/products').send(data);
     let recored = result.body;
     const catg = await mockRequest.get(`/api/v1/products/${recored._id}`);
@@ -60,8 +60,8 @@ let data2={
 
   it('it can get()', async () => {
     
-  // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
-  // let data2 = { name: 'name', display_name: 'display', description: 'description' };
+    // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+    // let data2 = { name: 'name', display_name: 'display', description: 'description' };
 
     let array = [data, data2];
 
@@ -83,7 +83,7 @@ let data2={
 
   it('it can delete()', async () => {
     
-  // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+    // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
 
     const result = await mockRequest.post('/api/v1/products').send(data);
     let recored = result.body;
@@ -93,15 +93,15 @@ let data2={
 
     Object.keys(data).forEach((key) => {
     // console.log('record',catItem);
-    expect(catItem[key]).toEqual(data[key]);
+      expect(catItem[key]).toEqual(data[key]);
     });
   });
 
 
   it('it can update()', async () => {
     
-  // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
-  //  let data2 = { name: 'name', display_name: 'display', description: 'description' };
+    // let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+    //  let data2 = { name: 'name', display_name: 'display', description: 'description' };
     const result = await mockRequest.post('/api/v1/products').send(data);
     let recored = result.body;
     await mockRequest.put(`/api/v1/products/${recored._id}`).send(data2);

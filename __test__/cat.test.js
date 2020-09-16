@@ -16,7 +16,7 @@ describe('categories Module', () => {
 
   it('it can create()', async () => {
     
-  let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+    let data = { name: 'Sondos', display_name: 'student', description: 'student' };
     const result = await mockRequest.post('/api/v1/categories').send(data);
     let recored = result.body;
     // console.log('recored', recored);
@@ -30,7 +30,7 @@ describe('categories Module', () => {
 
   it('it can get()', async () => {
     
-  let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+    let data = { name: 'Sondos', display_name: 'student', description: 'student' };
     const result = await mockRequest.post('/api/v1/categories').send(data);
     let recored = result.body;
     const catg = await mockRequest.get(`/api/v1/categories/${recored._id}`);
@@ -47,8 +47,8 @@ describe('categories Module', () => {
 
   it('it can get()', async () => {
     
-  let data = { name: 'Sondos', display_name: 'student', description: 'student' };
-  let data2 = { name: 'name', display_name: 'display', description: 'description' };
+    let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+    let data2 = { name: 'name', display_name: 'display', description: 'description' };
 
     let array = [data, data2];
 
@@ -70,7 +70,7 @@ describe('categories Module', () => {
 
   it('it can delete()', async () => {
     
-  let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+    let data = { name: 'Sondos', display_name: 'student', description: 'student' };
 
     const result = await mockRequest.post('/api/v1/categories').send(data);
     let recored = result.body;
@@ -79,16 +79,16 @@ describe('categories Module', () => {
     let catItem = catg.body;
 
     Object.keys(data).forEach((key) => {
-    console.log('record',catItem);
-    expect(catItem[key]).toEqual(data[key]);
+      console.log('record',catItem);
+      expect(catItem[key]).toEqual(data[key]);
     });
   });
 
 
   it('it can update()', async () => {
     
-  let data = { name: 'Sondos', display_name: 'student', description: 'student' };
-   let data2 = { name: 'name', display_name: 'display', description: 'description' };
+    let data = { name: 'Sondos', display_name: 'student', description: 'student' };
+    let data2 = { name: 'name', display_name: 'display', description: 'description' };
     const result = await mockRequest.post('/api/v1/categories').send(data);
     let recored = result.body;
     await mockRequest.put(`/api/v1/categories/${recored._id}`).send(data2);
