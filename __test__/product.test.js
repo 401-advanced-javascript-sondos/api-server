@@ -105,7 +105,7 @@ describe('products Module', () => {
     const result = await mockRequest.post('/api/v1/products').send(data);
     let recored = result.body;
     await mockRequest.put(`/api/v1/products/${recored._id}`).send(data2);
-    const catg = await (await mockRequest.get(`/api/v1/products/${recored._id}`));
+    const catg = await mockRequest.get(`/api/v1/products/${recored._id}`);
     let catItem = catg.body;
 
     Object.keys(data2).forEach((key) => {
