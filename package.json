@@ -9,7 +9,9 @@
   "scripts": {
     "test": "jest --verbose --coverage",
     "lint": "eslint '**/*.js' --ignore-pattern node_modules/",
-    "lint:js:fix": "eslint '**/*.js' --ignore-pattern node_modules/ --fix"
+    "lint:js:fix": "eslint '**/*.js' --ignore-pattern node_modules/ --fix",
+    "start": "node index.js",
+
   },
   "repository": {
     "type": "git",
