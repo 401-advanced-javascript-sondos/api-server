@@ -6,7 +6,7 @@ const mongoose=require('mongoose');
 const serverModul=require('./lib/server.js');
 
 const mongoose_url=process.env.url;
-
+console.log('url',process.env)
 const options={
   useNewUrlParser: true,
   useUnifiedTopology: true,
